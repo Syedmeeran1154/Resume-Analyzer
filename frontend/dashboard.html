@@ -2215,7 +2215,7 @@ async function extractResumeText(file) {
           const savedUser = localStorage.getItem('cn_current_user');
           if (!savedUser) {
             console.log('No user session found, redirecting to login page.');
-            window.location.href = 'index.html';
+            window.location.href = '/index';
             return;
           }
 
@@ -2245,7 +2245,7 @@ async function extractResumeText(file) {
           } catch (error) {
             console.error('Error initializing dashboard:', error);
             localStorage.removeItem('cn_current_user');
-            window.location.href = 'index.html';
+            window.location.href = '/index';
           }
         }
 
@@ -2381,7 +2381,7 @@ async function extractResumeText(file) {
           document.getElementById('logoutBtn').addEventListener('click', () => {
             if (confirm('Are you sure you want to logout?')) {
               localStorage.removeItem('cn_current_user');
-              window.location.href = 'index.html';
+              window.location.href = '/index';
             }
           });
 
