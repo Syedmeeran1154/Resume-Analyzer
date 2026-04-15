@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <title>HireSense - Professional Resume & JD Intelligence</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              500: '#22c55e', 
+              600: '#16a34a', 
+              700: '#15803d',
+              900: '#064e3b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body { background-color: #FAFAFA; background-image: radial-gradient(at 0% 0%, rgba(22, 163, 74, 0.03) 0px, transparent 50%); }
+    .hero-text-gradient { background: linear-gradient(135deg, #064e3b 0%, #16a34a 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .feature-card { background: #FFFFFF; border-radius: 12px; border: 1px solid #E5E7EB; transition: all 0.3s ease; }
+    .feature-card:hover { border-color: #16a34a; transform: translateY(-4px); box-shadow: 0 10px 30px -10px rgba(22, 163, 74, 0.2); }
+    .btn-primary { background: #16a34a; color: white; transition: all 0.2s; border-radius: 9999px; }
+    .btn-primary:hover { background: #15803d; transform: translateY(-1px); }
+    .glass-nav { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid #E5E7EB; }
+    .modal-backdrop { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); }
+  </style>
+</head>
+<body class="font-sans text-slate-700 antialiased">
+  
+  <header class="sticky top-0 z-40 w-full glass-nav">
+    <div class="max-w-7xl mx-auto flex justify-between items-center h-20 px-6 lg:px-8">
+        <div class="brand flex items-center gap-3 cursor-pointer" onclick="window.location.reload()">
+            <div class="w-10 h-10 bg-brand-600 rounded-lg flex items-center justify-center text-white shadow-lg">
+                <i class="fa-solid fa-file-circle-check text-lg"></i>
+            </div>
+            <div class="font-heading font-bold text-xl tracking-tight text-slate-900">HireSense</div>
+        </div>
+        <div class="flex gap-4 items-center">
+            <button onclick="authManager.show('login')" class="text-sm font-medium hover:text-brand-600 transition-colors">Sign In</button>
+            <button onclick="authManager.show('signup')" class="py-2.5 px-6 rounded-full bg-slate-900 text-white font-semibold text-sm hover:bg-slate-800 transition-all">Get Started</button>
+        </div>
+    </div>
+  </header>
+
+  <main>
+    <div id="landingPage" class="relative pt-20 pb-32">
+      <div class="max-w-5xl mx-auto px-6 text-center">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 border border-brand-100 text-xs font-medium text-brand-700 mb-8">
+          <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span></span>
+          Live: Llama 3.1 Powered Analysis
+        </div>
+
+        <h1 class="font-heading text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-6">
+          Optimize your Resume. <br>
+          <span class="hero-text-gradient">Beat the ATS.</span>
+        </h1>
+        
+        <p class="text-lg text-slate-500 mb-10 max-w-2xl mx-auto">
+          Quantify your professional value. Compare your profile against job descriptions and get actionable insights to land your next interview.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row justify-center gap-4 mb-24">
+          <button onclick="authManager.show('signup')" class="btn-primary py-4 px-8 text-base font-semibold shadow-lg shadow-brand-500/20">Analyze My Resume Now</button>
+          <button onclick="authManager.show('login')" class="py-4 px-8 rounded-full border border-slate-200 font-semibold hover:bg-slate-50">Compare JD Match</button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+          <div class="feature-card p-8">
+            <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center mb-6 text-brand-600">
+              <i class="fas fa-magnifying-glass-chart text-xl"></i>
+            </div>
+            <h3 class="font-heading text-lg font-bold text-slate-900 mb-2">ATS Scorer</h3>
+            <p class="text-sm text-slate-500">Upload your PDF and receive a 0-100 compatibility score based on modern recruiter algorithms.</p>
+          </div>
+          
+          <div class="feature-card p-8 border-brand-500 border-2 shadow-xl shadow-brand-500/5">
+            <div class="w-12 h-12 bg-brand-600 rounded-xl flex items-center justify-center mb-6 text-white">
+              <i class="fas fa-code-compare text-xl"></i>
+            </div>
+            <h3 class="font-heading text-lg font-bold text-slate-900 mb-2">JD Matcher</h3>
+            <p class="text-sm text-slate-500">Paste any job description to find skill gaps, missing keywords, and specific recommendations.</p>
+          </div>
+
+          <div class="feature-card p-8">
+            <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center mb-6 text-brand-600">
+              <i class="fas fa-lightbulb text-xl"></i>
+            </div>
+            <h3 class="font-heading text-lg font-bold text-slate-900 mb-2">Keyword Insights</h3>
+            <p class="text-sm text-slate-500">Identify high-impact keywords you've missed and get suggestions on where to place them.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="authModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden modal-backdrop">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden transform transition-all">
+      <div class="p-8">
+        <div class="flex justify-between items-center mb-6">
+          <h2 id="authTitle" class="text-2xl font-bold font-heading">Login</h2>
+          <button onclick="authManager.hide()" class="text-slate-400 hover:text-slate-600"><i class="fas fa-times"></i></button>
+        </div>
+        
+        <form id="authForm" class="space-y-4">
+          <div id="signupFields" class="hidden space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
+              <input type="text" id="authName" class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none">
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
+            <input type="email" id="authEmail" required class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Password</label>
+            <input type="password" id="authPassword" required class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-500 outline-none">
+          </div>
+          <button type="submit" id="authBtn" class="w-full py-3 bg-brand-600 text-white font-bold rounded-lg hover:bg-brand-700 transition-colors">Sign In</button>
+        </form>
+        
+        <p class="mt-6 text-center text-sm text-slate-500">
+          <span id="authToggleText">Don't have an account?</span>
+          <button onclick="authManager.toggle()" id="authToggleBtn" class="text-brand-600 font-bold hover:underline">Sign Up</button>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    class AuthManager {
+      constructor() {
+        this.modal = document.getElementById('authModal');
+        this.form = document.getElementById('authForm');
+        this.mode = 'login';
+        this.init();
+      }
+
+      init() {
+        this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+        // Check if user is already logged in
+        if (localStorage.getItem('cn_current_user')) {
+          window.location.href = 'dashboard.html';
+        }
+      }
+
+      show(mode = 'login') {
+        this.mode = mode;
+        this.modal.classList.remove('hidden');
+        this.updateUI();
+      }
+
+      hide() {
+        this.modal.classList.add('hidden');
+      }
+
+      toggle() {
+        this.mode = this.mode === 'login' ? 'signup' : 'login';
+        this.updateUI();
+      }
+
+      updateUI() {
+        const title = document.getElementById('authTitle');
+        const btn = document.getElementById('authBtn');
+        const toggleText = document.getElementById('authToggleText');
+        const toggleBtn = document.getElementById('authToggleBtn');
+        const signupFields = document.getElementById('signupFields');
+
+        if (this.mode === 'signup') {
+          title.textContent = 'Create Account';
+          btn.textContent = 'Sign Up';
+          toggleText.textContent = 'Already have an account?';
+          toggleBtn.textContent = 'Login';
+          signupFields.classList.remove('hidden');
+        } else {
+          title.textContent = 'Login';
+          btn.textContent = 'Sign In';
+          toggleText.textContent = "Don't have an account?";
+          toggleBtn.textContent = 'Sign Up';
+          signupFields.classList.add('hidden');
+        }
+      }
+
+     handleSubmit(e) {
+        e.preventDefault();
+        const email = document.getElementById('authEmail').value;
+        const password = document.getElementById('authPassword').value;
+        const name = document.getElementById('authName').value;
+
+        // Safety Fix: Ensure users is always an array
+        let usersData = localStorage.getItem('cn_users');
+        let users = [];
+        
+        try {
+            users = JSON.parse(usersData);
+            if (!Array.isArray(users)) {
+                users = []; // Reset to array if it's a corrupted object
+            }
+        } catch (err) {
+            users = []; // Reset if JSON is invalid
+        }
+
+        if (this.mode === 'signup') {
+          if (users.find(u => u.email === email)) {
+            alert('Email already exists!');
+            return;
+          }
+          const newUser = { id: Date.now(), name, email, password };
+          users.push(newUser);
+          localStorage.setItem('cn_users', JSON.stringify(users));
+          localStorage.setItem('cn_current_user', JSON.stringify(newUser));
+          localStorage.setItem(`cn_first_login_${newUser.id}`, 'true');
+        } else {
+          const user = users.find(u => u.email === email && u.password === password);
+          if (!user) {
+            alert('Invalid credentials!');
+            return;
+          }
+          localStorage.setItem('cn_current_user', JSON.stringify(user));
+        }
+
+        window.location.href = 'dashboard.html';
+      }
+    }
+
+    const authManager = new AuthManager();
+  </script>
+</body>
+</html>
