@@ -3793,7 +3793,8 @@ document.getElementById("coachForm").addEventListener("submit", async (e) => {
 
             results.classList.remove('hidden');
 
-            const finalScore = result.score;
+           const finalScore = Math.round(result.score); // Force whole number
+atsScoreEl.textContent = `${finalScore}%`;
             // Assuming category mapping logic is handled based on score or provided by AI
             // We'll calculate a simple category here based on score
             let finalCategory = 'Weak';
@@ -3803,7 +3804,7 @@ document.getElementById("coachForm").addEventListener("submit", async (e) => {
 
 
             // Update ATS Score and color (using the logic you already set up)
-            atsScoreEl.textContent = `${finalScore}%`;
+            
             
             let colorClass = 'bg-gray-500';
             if (finalCategory === 'Strong') {
@@ -3914,8 +3915,8 @@ renderJdMatchResults(data) {
     const scoreContainer = scoreEl.parentElement;
 
     // Score Animation/Color
-    const score = data.match_score || 0;
-    scoreEl.textContent = `${score}%`;
+   const score = Math.round(data.match_score || 0); // Force whole number
+scoreEl.textContent = `${score}%`;
     
     // Dynamic Tailwind Classes for Score Box
     scoreContainer.className = "p-4 rounded-xl text-center transition-all duration-500 " + 
