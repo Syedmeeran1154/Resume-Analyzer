@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// 2. SECURITY HEADERS (Fixes the CSP "Blocked" errors in console)
+// 2. SECURITY HEADERS (Fixes CSP "Blocked" errors)
 app.use((req, res, next) => {
     res.setHeader(
         "Content-Security-Policy",
@@ -26,8 +26,9 @@ app.use((req, res, next) => {
     next();
 });
 
-// 3. STATIC FILES
-const frontendPath = path.join(__dirname, "frontend");
+// 3. STATIC FILES PATHING FIX
+// ✅ We use '..' to go up one level out of /backend/ to find /frontend/
+const frontendPath = path.join(__dirname, "..", "frontend");
 app.use(express.static(frontendPath));
 
 // 4. PAGE ROUTES
@@ -89,7 +90,7 @@ app.post("/api/jd-match", async (req, res) => {
     }
 });
 
-// ✅ INTERVIEW PREP API (Fixed Missing Route)
+// ✅ INTERVIEW PREP API
 app.post("/api/interview-prep", async (req, res) => {
     const GROQ_API_KEY = process.env.GROQ_API_KEY;
     try {
