@@ -3917,6 +3917,7 @@ renderJdMatchResults(data) {
     // Score Animation/Color
    const score = Math.round(data.match_score || 0); // Force whole number
 scoreEl.textContent = `${score}%`;
+
     
     // Dynamic Tailwind Classes for Score Box
     scoreContainer.className = "p-4 rounded-xl text-center transition-all duration-500 " + 

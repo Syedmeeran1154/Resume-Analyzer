@@ -157,7 +157,7 @@
         this.form.addEventListener('submit', (e) => this.handleSubmit(e));
         // Check if user is already logged in and redirect to clean route
         if (localStorage.getItem('cn_current_user')) {
-          window.location.replace('/dashboard'); // ✅ FIXED: Uses route and replace to stop loops
+          window.location.replace('/dashboard.html'); // ✅ FIXED: Uses route and replace to stop loops
         }
       }
 
@@ -237,7 +237,7 @@
         }
 
         // ✅ FIXED: Standardized redirect
-        window.location.replace('/dashboard');
+        window.location.replace('/dashboard.html');
       }
     }
 
