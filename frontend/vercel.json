@@ -5,8 +5,12 @@
       "destination": "/frontend/dashboard.html"
     },
     {
-      "source": "/(.*)",
+      "source": "/",
       "destination": "/frontend/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/frontend/$1"
     }
   ]
 }
