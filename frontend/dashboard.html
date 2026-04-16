@@ -628,7 +628,8 @@
                         </h2>
                         <form id="profileForm" class="flex flex-col gap-4">
                             <label for="photoUpload" class="resume-photo-upload">
-                                <input type="file" id="photoUpload" accept="image/*" class="hidden">
+    <input type="file" id="photoUpload" accept="image/*" class="hidden">
+    </label>
                                 <div class="flex flex-col items-center justify-center">
                                     <img id="photoPreview" class="resume-photo-preview mb-2 hidden" alt="Profile Photo Preview">
                                     <span id="photoPlaceholder" class="text-gray-400">
@@ -636,7 +637,7 @@
                                         Click to add a profile photo
                                     </span>
                                 </div>
-                            </label>
+                            
                             <input id="name" type="text" placeholder="Full name" class="input" />
                             <input id="email" type="email" placeholder="Email" class="input" />
                             <input id="phone" type="tel" placeholder="Phone number" class="input" />
@@ -659,10 +660,8 @@
                         <form id="skillsForm" class="flex flex-col gap-4 mb-6">
                             <input id="skillName" type="text" placeholder="Skill name (e.g., JavaScript, Python)" class="input" required />
                             <div class="flex items-center gap-4">
-                                <label class="text-sm text-slate-500 flex-1">
-                                    Proficiency Level:
-                                    <input id="skillLevel" type="range" min="0" max="100" value="75" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer mt-2" />
-                                </label>
+                                <label for="skillLevel" class="text-sm text-slate-500 flex-1">Proficiency Level:</label>
+<input id="skillLevel" type="range" ... />
                                 <span id="skillLevelVal" class="w-12 text-sm font-semibold bg-indigo-100 px-2 py-1 rounded">75%</span>
                             </div>
                             <div class="flex gap-2">
