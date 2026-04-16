@@ -13,14 +13,24 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// 1. MIDDLEWARE
 app.use(cors());
 app.use(express.json());
 
-// ✅ FIX: Standardized pathing to look into the 'frontend' folder correctly
+// 2. SECURITY HEADERS (Fixes the CSP "Blocked" errors in console)
+app.use((req, res, next) => {
+    res.setHeader(
+        "Content-Security-Policy",
+        "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self' https://api.groq.com http://localhost:3000;"
+    );
+    next();
+});
+
+// 3. STATIC FILES
 const frontendPath = path.join(__dirname, "frontend");
 app.use(express.static(frontendPath));
 
-// ROUTES
+// 4. PAGE ROUTES
 app.get("/", (req, res) => {
     res.sendFile(path.join(frontendPath, "index.html"));
 });
@@ -28,6 +38,8 @@ app.get("/", (req, res) => {
 app.get("/dashboard", (req, res) => {
     res.sendFile(path.join(frontendPath, "dashboard.html"));
 });
+
+// 5. API ROUTES
 
 // ✅ RESUME SCORER API
 app.post("/api/resume-score", async (req, res) => {
@@ -77,6 +89,29 @@ app.post("/api/jd-match", async (req, res) => {
     }
 });
 
+// ✅ INTERVIEW PREP API (Fixed Missing Route)
+app.post("/api/interview-prep", async (req, res) => {
+    const GROQ_API_KEY = process.env.GROQ_API_KEY;
+    try {
+        const payload = req.body;
+        const prompt = `Generate interview prep for role: ${payload.role} at ${payload.company}. Return JSON: {"repeated_questions": [{"question": "string", "answer": "string"}], "company_insight": "string", "what_they_look_for": [], "tips": [], "confidence_advice": "string"}`;
+
+        const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+            method: "POST",
+            headers: { "Authorization": `Bearer ${GROQ_API_KEY}`, "Content-Type": "application/json" },
+            body: JSON.stringify({
+                model: "llama-3.1-8b-instant",
+                messages: [{ role: "user", content: prompt }],
+                response_format: { type: "json_object" }
+            })
+        });
+        const data = await response.json();
+        res.json(JSON.parse(data.choices[0].message.content));
+    } catch (error) {
+        res.status(500).json({ error: "Interview Prep Failed" });
+    }
+});
+
 app.listen(PORT, "0.0.0.0", () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}`);
+    console.log(`🚀 HireSense Server running on http://localhost:${PORT}`);
 });
