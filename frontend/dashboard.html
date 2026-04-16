@@ -1477,7 +1477,7 @@ async function extractResumeText(file) {
   throw new Error("Unsupported file type or extraction failure.");
 }
       async function analyzeResume(resumeText) {
-  const res = await fetch("https://cnv-z6k7.onrender.com/api/resume-score", {
+  const res = await fetch("https://resume-analyzer-ozu5.onrender.com/api/resume-score", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ resumeText })
@@ -3881,7 +3881,7 @@ document.getElementById("coachForm").addEventListener("submit", async (e) => {
         };
 
         // 4. API CALL
-        const res = await fetch("https://cnv-z6k7.onrender.com/api/jd-match", {
+        const res = await fetch("https://resume-analyzer-ozu5.onrender.com/api/jd-match", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload)
