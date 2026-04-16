@@ -156,9 +156,9 @@
 
       init() {
         this.form.addEventListener('submit', (e) => this.handleSubmit(e));
-        // Check if user is already logged in
+        // Check if user is already logged in and redirect to clean route
         if (localStorage.getItem('cn_current_user')) {
-          window.location.href = '/dashboard';
+          window.location.replace('/dashboard'); // ✅ FIXED: Uses route and replace to stop loops
         }
       }
 
@@ -212,10 +212,10 @@
         try {
             users = JSON.parse(usersData);
             if (!Array.isArray(users)) {
-                users = []; // Reset to array if it's a corrupted object
+                users = []; 
             }
         } catch (err) {
-            users = []; // Reset if JSON is invalid
+            users = []; 
         }
 
         if (this.mode === 'signup') {
@@ -237,7 +237,8 @@
           localStorage.setItem('cn_current_user', JSON.stringify(user));
         }
 
-        window.location.href = '/dashboard';
+        // ✅ FIXED: Standardized redirect
+        window.location.replace('/dashboard');
       }
     }
 

@@ -2209,44 +2209,39 @@ async function extractResumeText(file) {
         this.init();
     }
 
-        init() {
-          // Check authentication
-          const savedUser = localStorage.getItem('cn_current_user');
-          if (!savedUser) {
-            console.log('No user session found, redirecting to login page.');
-            window.location.href = 'index.html';
+        async init() {
+        const savedUser = localStorage.getItem('cn_current_user');
+        
+        // 1. Check if user exists
+        if (!savedUser) {
+            console.warn("No session found. Redirecting...");
+            window.location.replace('/');
             return;
-          }
+        }
 
-          try {
-            console.log('User session found. Initializing dashboard...');
+        try {
             this.currentUser = JSON.parse(savedUser);
             
-            // ⭐ NEW LOGIC: Check for first login flag
-            const firstLoginKey = `cn_first_login_${this.currentUser.id}`;
-            const isFirstLogin = localStorage.getItem(firstLoginKey);
-
-            if (isFirstLogin === 'true') {
-                this.isFirstLogin = true;
-                // Clear the flag immediately after retrieving it for this session
-                localStorage.removeItem(firstLoginKey); 
-            }
-            // Initialize systems
+            // 2. Initialize Managers
             this.themeManager = new ThemeManager();
-            window.themeManager = this.themeManager; // Make globally available
             this.skillMapper = new SkillMapper();
             this.gamificationSystem = new GamificationSystem();
             
+            // 3. Load Data
+            this.initializeData();
             this.setupUserInterface();
-            this.initializeData(); 
             this.setupEventListeners();
+            
+            // 4. Initial Render
             this.renderAll();
-          } catch (error) {
-            console.error('Error initializing dashboard:', error);
-            localStorage.removeItem('cn_current_user');
-            window.location.href = 'index.html';
-          }
+            
+            console.log("✅ Dashboard ready for:", this.currentUser.name);
+        } catch (error) {
+            console.error("❌ Critical Dashboard Error:", error);
+            // DO NOT redirect here unless you want to kick the user out on any error
+            // For debugging, we keep them here so they can see the console logs
         }
+    }
 
         setupUserInterface() {
           // ⭐ MODIFIED: Check first login flag to set the correct welcome message
